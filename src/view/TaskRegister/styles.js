@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 
 export const Container = styled.div`
-    height: 100vh;
+    height: 100%;
     width: 100%;
     display: grid;
-    grid-template-rows: 80px calc(100vh - 180px) 80px;
+    grid-template-rows: 80px calc(100% - 180px) 80px;
     grid-template-areas: "header"  "form" "footer";
     gap: 10px;
     h3{
@@ -27,18 +27,21 @@ export const Container = styled.div`
 `
 
 export const FormContainer = styled.form`
+    justify-items: center;
     grid-area: form;
     display: grid;
-    height: 500px;
+    max-height: 100%;
     justify-content: center;
     grid-template-rows: 60px 400px;
    
 `
 
 export const DivIcons = styled.div`
+    justify-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    width: 100%;
     margin-top: 10px;
     .inative{
         opacity: 0.5;
@@ -48,9 +51,9 @@ export const DivIcons = styled.div`
         border: none;
     }
     img{
-        width: 60px ;
-        height: 60px;
-        margin: 0px 20px;
+        max-width: 50px ;
+        max-height: 50px;
+        margin: 0px 2px;
         cursor: pointer;
 
     }

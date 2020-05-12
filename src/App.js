@@ -1,5 +1,4 @@
 import React from "react";
-import Home from "./view/Home";
 import Routes from "./routes";
 
 

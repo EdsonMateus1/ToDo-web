@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import TaskCard from "../../components/TasckCard";
 import FilterCard from "../../components/FilterCard";
-import typeIcons from "../../utils/typeIcons";
 import axios from "../../service/api";
 import * as S from "./styles";
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("all");
-  
-  
+  const [taskState, setTask] = useState([]);
+  const gettaks = useCallback(async () => {
+    const date = await axios.get(`/filter/${activeFilter}/11:11:11:11:11:11`);
+    setTask(date.data);
+  }, [activeFilter]);
+  useEffect(() => {
+    gettaks();
+  }, [gettaks, activeFilter]);
+
+  const setNotification = useCallback(() => {
+    setActiveFilter("late");
+  }, []);
   return (
     <S.Container>
-      <Header />
+      <Header onListLate={setNotification} />
       <S.ContainerFilter>
         <FilterCard
           title="Todos"
@@ -55,21 +64,15 @@ export default function Home() {
       <S.ContainerHR>
         <hr></hr>
         <div>
-          <h1>Tarefas</h1>
+          <h1>{activeFilter !== "late" ? "Tarefas" : "Tarefas Atrasadas"}</h1>
         </div>
       </S.ContainerHR>
       <S.ContainerTakc>
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
+        {taskState.map((e) => (
+          <TaskCard key={e._id} title={e.title} type={e.type} when={e.when} />
+        ))}
       </S.ContainerTakc>
+
       <Footer />
     </S.Container>
   );
