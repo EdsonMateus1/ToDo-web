@@ -24,7 +24,7 @@ export default function Header({ onListLate }) {
         <p className="divi"></p>
         <Link to="/register">Nova tarefa</Link>
         <p className="divi"></p>
-        <Link to="/register">Cadastrar Celular</Link>
+        <Link to="#">Cadastrar Celular</Link>
         <p className="divi"></p>
         <img
           onClick={onListLate}

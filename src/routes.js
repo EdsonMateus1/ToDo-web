@@ -11,6 +11,7 @@ export default function Routes() {
             <Switch>
                 <Route  path ="/" exact  component = {Home} />
                 <Route  path ="/register" exact  component = {TaskRegister} />
+                <Route  path ="/register/:id" exact  component = {TaskRegister} />
             </Switch>
         </BrowserRouter>
             

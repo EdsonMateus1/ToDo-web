@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import icons from "../../utils/typeIcons";
@@ -9,11 +9,12 @@ import axios from "../../service/api";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { format } from "date-fns";
 
-export default function Task() {
+export default function Task({ match }) {
   const history = useHistory();
   const [type, setType] = useState(null);
-  const { getFieldProps, handleSubmit, errors } = useFormik({
+  const { getFieldProps, handleSubmit, errors, setValues } = useFormik({
     initialValues: {
       title: "",
       description: "",
@@ -64,6 +65,22 @@ export default function Task() {
       toast.error("Selecione a categoria da sua tarefa");
     }
   }, [errors, type]);
+
+  const loadTaskDetails = useCallback(async () => {
+    const daTa = await axios.get(`/${match.params.id}`);
+    const date = format(new Date(daTa.data.when), "yyyy-MM-dd");
+    const time = format(new Date(daTa.data.when), "HH:mm");
+    setValues({
+      title: daTa.data.title,
+      description: daTa.data.description,
+      time: time,
+      date: date,
+    });
+  }, [match, setValues]);
+
+  useEffect(() => {
+    loadTaskDetails();
+  }, [loadTaskDetails]);
 
   return (
     <S.Container>

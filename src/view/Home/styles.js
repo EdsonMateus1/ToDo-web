@@ -51,5 +51,9 @@ export const ContainerTakc = styled.div`
     box-sizing: content-box;
     margin-top: 20px;
     padding: 0px 0px;
+    a{
+        text-decoration:none;
+        color: #000;
+    }
     
 `

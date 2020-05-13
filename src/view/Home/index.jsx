@@ -5,13 +5,14 @@ import TaskCard from "../../components/TasckCard";
 import FilterCard from "../../components/FilterCard";
 import axios from "../../service/api";
 import * as S from "./styles";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [taskState, setTask] = useState([]);
   const gettaks = useCallback(async () => {
-    const date = await axios.get(`/filter/${activeFilter}/11:11:11:11:11:11`);
-    setTask(date.data);
+    const daTa = await axios.get(`/filter/${activeFilter}/11:11:11:11:11:11`);
+    setTask(daTa.data);
   }, [activeFilter]);
   useEffect(() => {
     gettaks();
@@ -69,7 +70,9 @@ export default function Home() {
       </S.ContainerHR>
       <S.ContainerTakc>
         {taskState.map((e) => (
-          <TaskCard key={e._id} title={e.title} type={e.type} when={e.when} />
+          <Link key={e._id} to={`/register/${e._id}`}>
+            <TaskCard  title={e.title} type={e.type} when={e.when} />
+          </Link>
         ))}
       </S.ContainerTakc>
 

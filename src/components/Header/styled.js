@@ -8,7 +8,7 @@ export const Container = styled.header`
     justify-content: space-between;
     border-bottom: solid 3px #EE6516;
     background-color: #20295F;
-    padding: 1px 1px;
+    padding: 1px 6px;
     align-items: center;
 `
 export const Img = styled.img`
