@@ -20,7 +20,7 @@ export default function Task({ match }) {
       description: "",
       date: "",
       time: "",
-      check: false,
+      done: false,
     },
 
     validationSchema: yup.object({
@@ -33,18 +33,24 @@ export default function Task({ match }) {
     }),
     onSubmit: async (values) => {
       const data = {
+        done: values.done,
         macaddress: "11:11:11:11:11:11",
         type: type,
         title: values.title,
         description: values.description,
         when: `${values.date}T${values.time}:00.000`,
-        check: false,
       };
 
       try {
-        await axios.post("/", data);
-        alert("cadastro realizado");
-        history.push("/");
+        if (match.params.id) {
+          await axios.put(`/${match.params.id}`, data);
+          alert("Tarefa atualizada com sucesso");
+          history.push("/");
+        } else {
+          await axios.post("/", data);
+          alert("cadastro realizado");
+          history.push("/");
+        }
       } catch (error) {
         toast.error("Falha ao realizar cadastro");
         console.log(error);
@@ -67,20 +73,37 @@ export default function Task({ match }) {
   }, [errors, type]);
 
   const loadTaskDetails = useCallback(async () => {
+    if (!match.params.id) {
+      return null;
+    }
     const daTa = await axios.get(`/${match.params.id}`);
     const date = format(new Date(daTa.data.when), "yyyy-MM-dd");
     const time = format(new Date(daTa.data.when), "HH:mm");
+
+    setType(daTa.data.type);
     setValues({
       title: daTa.data.title,
       description: daTa.data.description,
       time: time,
       date: date,
+      done: daTa.data.done,
     });
   }, [match, setValues]);
 
   useEffect(() => {
     loadTaskDetails();
   }, [loadTaskDetails]);
+
+  const handleDelete = useCallback(async () => {
+    try {
+      await axios.delete(`/${match.params.id}`);
+      alert("Tarefa excluida");
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      toast.error("nao foi possivel excluir a tarefa");
+    }
+  }, [match, history]);
 
   return (
     <S.Container>
@@ -99,7 +122,7 @@ export default function Task({ match }) {
                   <img
                     src={elemnt}
                     alt="icons"
-                    className={type && type !== index && "inative"}
+                    className={type && type !== index ? "inative" : null}
                   />
                 </button>
               )
@@ -130,10 +153,16 @@ export default function Task({ match }) {
 
           <S.divButtonsInput>
             <div>
-              <input type="checkbox" {...getFieldProps("check")} />
+              <input
+                type="checkbox"
+                {...getFieldProps("done")}
+                checked={getFieldProps("done").value}
+              />
               <h3>Concluido</h3>
             </div>
-            <button type="button">Excluir</button>
+            <button type="button" onClick={handleDelete}>
+              Excluir
+            </button>
           </S.divButtonsInput>
         </S.divFomr>
         <button className="button" type="submit" onClick={validationFomr}>

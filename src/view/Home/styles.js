@@ -38,7 +38,7 @@ export const ContainerHR = styled.div`
         top: -20px;
         display: flex;
         justify-content:center;
-
+    
     }
 
 `

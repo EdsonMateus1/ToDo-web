@@ -71,7 +71,7 @@ export default function Home() {
       <S.ContainerTakc>
         {taskState.map((e) => (
           <Link key={e._id} to={`/register/${e._id}`}>
-            <TaskCard  title={e.title} type={e.type} when={e.when} />
+            <TaskCard  title={e.title} type={e.type} when={e.when} done={e.done} />
           </Link>
         ))}
       </S.ContainerTakc>
