@@ -15,12 +15,10 @@ export const Container = styled.div`
     padding:3px;
     position: relative;
     transition: 0.3s ease ; 
+    overflow: hidden;
     &:hover{
         cursor: pointer;
         opacity: 0.5;
-    }
-    @media screen and (max-width: 800px) {
-        width: 150px;
     }
 `
 export const TopCard = styled.div`

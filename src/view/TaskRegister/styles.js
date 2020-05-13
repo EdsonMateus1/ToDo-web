@@ -20,9 +20,13 @@ export const Container = styled.div`
         border-radius: 10px;
         color: #ffffff;
         font-size: 20px;
+        margin-top: 40px;
     }
     button{
         cursor: pointer;
+    }
+    small{
+        color: red;
     }
 `
 
@@ -75,17 +79,25 @@ export const divTitleInput = styled.div`
         border: none;
         width: 100%;
         border-bottom: solid 1px #EE6516 ;
+        &::-webkit-input-placeholder {
+        color: red;
+        }
     }
 
 `
 
 export const divDescriptionInput = styled.div`
+
+    
     textarea{
         width: 55vw;
         height: 22vh;
         resize: none;
         border: solid 1px #EE6516;
         border-radius: 3px;
+        &::-webkit-input-placeholder {
+        color: red;
+        }
         
     }
 
@@ -103,7 +115,7 @@ export const divDateTimeInput = styled.div`
     }
 `
 export const divButtonsInput = styled.div`
-    margin: 15px 0px;
+    margin: 20px 0px;
     display: flex;
     justify-content: space-between;
     div{

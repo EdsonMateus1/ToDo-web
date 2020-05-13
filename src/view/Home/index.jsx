@@ -62,7 +62,7 @@ export default function Home() {
       </S.ContainerFilter>
 
       <S.ContainerHR>
-        <hr></hr>
+        <hr />
         <div>
           <h1>{activeFilter !== "late" ? "Tarefas" : "Tarefas Atrasadas"}</h1>
         </div>

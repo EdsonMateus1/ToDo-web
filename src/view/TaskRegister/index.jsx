@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import icons from "../../utils/typeIcons";
@@ -7,12 +7,13 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "../../service/api";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Task() {
   const history = useHistory();
-  const [type, setType] = useState();
-
-  const { getFieldProps, handleSubmit, errors, touched } = useFormik({
+  const [type, setType] = useState(null);
+  const { getFieldProps, handleSubmit, errors } = useFormik({
     initialValues: {
       title: "",
       description: "",
@@ -20,8 +21,7 @@ export default function Task() {
       time: "",
       check: false,
     },
-    validateOnBlur: false,
-    validateOnChange: false,
+
     validationSchema: yup.object({
       title: yup.string().required("Preenchimento do titulo e obrigatorio"),
       description: yup
@@ -39,29 +39,46 @@ export default function Task() {
         when: `${values.date}T${values.time}:00.000`,
         check: false,
       };
-      console.log(data);
+
       try {
         await axios.post("/", data);
         alert("cadastro realizado");
         history.push("/");
       } catch (error) {
-        alert("falha ao cadastras");
+        toast.error("Falha ao realizar cadastro");
         console.log(error);
       }
     },
   });
-  console.log(errors);
-  
+
+  const validationFomr = useCallback(() => {
+    if (errors.title) {
+      return toast.error(errors.title);
+    } else if (errors.description) {
+      return toast.error(errors.description);
+    } else if (errors.date) {
+      return toast.error(errors.date);
+    } else if (errors.time) {
+      return toast.error(errors.time);
+    } else if (type == null) {
+      toast.error("Selecione a categoria da sua tarefa");
+    }
+  }, [errors, type]);
+
   return (
     <S.Container>
-      <Header onListLate={() => history.push("/")}/>
+      <Header onListLate={() => history.push("/")} />
       <Footer />
       <S.FormContainer onSubmit={handleSubmit}>
         <S.DivIcons>
           {icons.map(
             (elemnt, index) =>
               index > 0 && (
-                <button key={index} type="button" onClick={() => setType(index)}>
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setType(index)}
+                >
                   <img
                     src={elemnt}
                     alt="icons"
@@ -74,7 +91,7 @@ export default function Task() {
         <S.divFomr>
           <S.divTitleInput>
             <h3>Titulo</h3>
-            <input type="text" {...getFieldProps("title")} />
+            <input type="text" autoFocus {...getFieldProps("title")} />
           </S.divTitleInput>
 
           <S.divDescriptionInput>
@@ -84,11 +101,13 @@ export default function Task() {
 
           <S.divDateTimeInput>
             <h3>Data</h3>
+
             <input type="date" {...getFieldProps("date")} />
           </S.divDateTimeInput>
 
           <S.divDateTimeInput>
             <h3>Hora</h3>
+
             <input type="time" {...getFieldProps("time")} />
           </S.divDateTimeInput>
 
@@ -99,11 +118,9 @@ export default function Task() {
             </div>
             <button type="button">Excluir</button>
           </S.divButtonsInput>
-
-          
         </S.divFomr>
-        <button className="button" type="submit">
-            Salvar
+        <button className="button" type="submit" onClick={validationFomr}>
+          Salvar
         </button>
       </S.FormContainer>
     </S.Container>

@@ -14,7 +14,7 @@ export default function Header({ onListLate }) {
   }, []);
   useEffect(() => {
     getLate();
-  }, [getLate]);
+  }, [getLate, latekStateCout]);
   return (
     <S.Container>
       <S.Img src={logoTodo} alt="logo todo " />
