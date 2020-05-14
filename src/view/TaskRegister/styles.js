@@ -14,13 +14,15 @@ export const Container = styled.div`
     }
     .button{
         width : 100%;
-        height: 35px;
+        height: 45px;
         background-color: #EE6516;
         border: none;
         border-radius: 10px;
         color: #ffffff;
         font-size: 20px;
-        margin-top: 40px;
+        margin-top: 27px;
+        box-shadow: 1px 1px 5px #EE6516 ;
+        
     }
     button{
         cursor: pointer;
@@ -65,7 +67,7 @@ export const DivIcons = styled.div`
 `
 export const divFomr = styled.div`
     justify-self: center;
-    margin-top: 10px;
+    margin-top: 20px;
 
 
 `
@@ -81,6 +83,9 @@ export const divTitleInput = styled.div`
         border-bottom: solid 1px #EE6516 ;
         &::-webkit-input-placeholder {
         color: red;
+        }
+        &:focus{
+            outline: 0;
         }
     }
 
@@ -98,6 +103,9 @@ export const divDescriptionInput = styled.div`
         &::-webkit-input-placeholder {
         color: red;
         }
+        &:focus{
+            outline: 0;
+        }
         
     }
 
@@ -112,10 +120,13 @@ export const divDateTimeInput = styled.div`
         border: none;
         width: 55vw;
         border-bottom: solid 1px #EE6516 ;
+        &:focus{
+            outline: 0;
+        }
     }
 `
 export const divButtonsInput = styled.div`
-    margin: 20px 0px;
+    margin: 10px 0px;
     display: flex;
     justify-content: space-between;
     div{

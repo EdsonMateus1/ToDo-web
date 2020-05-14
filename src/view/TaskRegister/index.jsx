@@ -96,15 +96,17 @@ export default function Task({ match }) {
 
   const handleDelete = useCallback(async () => {
     try {
-      await axios.delete(`/${match.params.id}`);
-      alert("Tarefa excluida");
-      history.push("/");
+      if (window.confirm("Deseja deletar a tarefa")) {
+        await axios.delete(`/${match.params.id}`);
+        alert("Tarefa excluida");
+        history.push("/");
+      }
     } catch (error) {
       console.log(error);
       toast.error("nao foi possivel excluir a tarefa");
     }
   }, [match, history]);
-
+  
   return (
     <S.Container>
       <Header onListLate={() => history.push("/")} />
@@ -152,17 +154,21 @@ export default function Task({ match }) {
           </S.divDateTimeInput>
 
           <S.divButtonsInput>
-            <div>
-              <input
-                type="checkbox"
-                {...getFieldProps("done")}
-                checked={getFieldProps("done").value}
-              />
-              <h3>Concluido</h3>
-            </div>
-            <button type="button" onClick={handleDelete}>
-              Excluir
-            </button>
+            {match.params.id && (
+              <div>
+                <input
+                  type="checkbox"
+                  {...getFieldProps("done")}
+                  checked={getFieldProps("done").value}
+                />
+                <h3>Concluido</h3>
+              </div>
+            )}{" "}
+            {match.params.id && (
+              <button type="button" onClick={handleDelete}>
+                Excluir
+              </button>
+            )}
           </S.divButtonsInput>
         </S.divFomr>
         <button className="button" type="submit" onClick={validationFomr}>

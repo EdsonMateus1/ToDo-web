@@ -20,7 +20,7 @@ export const Container = styled.div`
         cursor: pointer;
         opacity: 0.5;
     }
-    opacity: ${prosp => prosp.done ? 0.5 : 1}
+    opacity: ${prosp => prosp.done ? 0.5 : 1};
 
 `
 export const TopCard = styled.div`

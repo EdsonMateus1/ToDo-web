@@ -42,13 +42,12 @@ export const ContainerHR = styled.div`
     }
 
 `
-export const ContainerTakc = styled.div`
+export const ContainerTakc = styled.main`
     overflow-y: scroll;
     grid-area: task;
     display: flex;
     flex-wrap: wrap;
     padding: 0px 7px;
-    box-sizing: content-box;
     margin-top: 20px;
     padding: 0px 0px;
     a{
