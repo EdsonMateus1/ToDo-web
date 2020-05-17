@@ -16,6 +16,7 @@ export const Container = styled.div`
     position: relative;
     transition: 0.3s ease ; 
     overflow: hidden;
+    text-align: center;
     &:hover{
         cursor: pointer;
         opacity: 0.5;

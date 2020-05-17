@@ -33,7 +33,7 @@ export const ConLinks = styled.div`
         text-decoration: none;
         color: #ffff; 
         cursor: pointer;
-        
+        font-size : 18px;
         &:hover{
             color:  #EE6516;
         }
@@ -54,6 +54,16 @@ export const ConLinks = styled.div`
     .divi::after{
         content: "|";
         color: #fff;
+    }
+    .buttonLink{
+        border: none;
+        color: #ffff;        
+        background-color: #20295F;
+        font-size : 18px;
+        cursor: pointer;
+        &:hover{
+            color:  #EE6516;
+        }
     }
 
 `

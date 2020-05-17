@@ -27,7 +27,7 @@ export const ContainerHR = styled.div`
     margin-top: 30px;
     color: #707070;
     h1{
-        font-size: 25px;
+        font-size: 20px;
     }
     
     div{

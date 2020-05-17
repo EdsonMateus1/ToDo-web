@@ -13,7 +13,7 @@ export const Container = styled.div`
         margin: 5px 0px;
     }
     .button{
-        width : 100%;
+        width : 90%;
         height: 45px;
         background-color: #EE6516;
         border: none;
@@ -22,13 +22,11 @@ export const Container = styled.div`
         font-size: 20px;
         margin-top: 27px;
         box-shadow: 1px 1px 5px #EE6516 ;
+        outline: 0;
         
     }
     button{
         cursor: pointer;
-    }
-    small{
-        color: red;
     }
 `
 
@@ -129,6 +127,9 @@ export const divButtonsInput = styled.div`
     margin: 10px 0px;
     display: flex;
     justify-content: space-between;
+    input:hover{
+        cursor: pointer;
+    }
     div{
         display: flex;
         justify-content: center;

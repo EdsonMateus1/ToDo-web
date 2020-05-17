@@ -4,23 +4,36 @@ import Footer from "../../components/Footer";
 import TaskCard from "../../components/TasckCard";
 import FilterCard from "../../components/FilterCard";
 import axios from "../../service/api";
+import isConnetcted from "../../utils/isConnected";
 import * as S from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("all");
+
   const [taskState, setTask] = useState([]);
+
+  const history = useHistory();
+
   const gettaks = useCallback(async () => {
     const daTa = await axios.get(`/filter/${activeFilter}/11:11:11:11:11:11`);
     setTask(daTa.data);
   }, [activeFilter]);
+
   useEffect(() => {
     gettaks();
   }, [gettaks, activeFilter]);
 
+  useEffect(() => {
+    if (!isConnetcted) {
+      history.push("/qrcode")
+    }
+  }, [history]);
+
   const setNotification = useCallback(() => {
     setActiveFilter("late");
   }, []);
+
   return (
     <S.Container>
       <Header onListLate={setNotification} />
@@ -71,7 +84,12 @@ export default function Home() {
       <S.ContainerTakc>
         {taskState.map((e) => (
           <Link key={e._id} to={`/register/${e._id}`}>
-            <TaskCard  title={e.title} type={e.type} when={e.when} done={e.done} />
+            <TaskCard
+              title={e.title}
+              type={e.type}
+              when={e.when}
+              done={e.done}
+            />
           </Link>
         ))}
       </S.ContainerTakc>

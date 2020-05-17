@@ -4,6 +4,7 @@ import logoTodo from "../../assets/todo.png";
 import logoBell from "../../assets/Icon awesome-bell.png";
 import axios from "../../service/api";
 import { Link } from "react-router-dom";
+import isConnected from "../../utils/isConnected";
 
 export default function Header({ onListLate }) {
   const [latekStateCout, setLate] = useState([]);
@@ -15,6 +16,10 @@ export default function Header({ onListLate }) {
   useEffect(() => {
     getLate();
   }, [getLate, latekStateCout]);
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem("@todo/macandrres");
+    window.location.reload();
+  }, []);
   return (
     <S.Container>
       <S.Img src={logoTodo} alt="logo todo " />
@@ -24,14 +29,26 @@ export default function Header({ onListLate }) {
         <p className="divi"></p>
         <Link to="/register">Nova tarefa</Link>
         <p className="divi"></p>
-        <Link to="/qrcode">Cadastrar Celular</Link>
-        <p className="divi"></p>
-        <img
-          onClick={onListLate}
-          src={logoBell}
-          alt="imagem sino de noticacoes"
-        />
-        <span>{latekStateCout}</span>
+        {isConnected ? (
+          <button onClick={handleLogout} className="buttonLink">
+            Sair
+          </button>
+        ) : (
+          <>
+            <Link to="/qrcode">Cadastrar Celular</Link>
+          </>
+        )}
+        {isConnected && (
+          <>
+            <p className="divi"></p>
+            <img
+              onClick={onListLate}
+              src={logoBell}
+              alt="imagem sino de noticacoes"
+            />
+            <span>{latekStateCout}</span>
+          </>
+        )}
       </S.ConLinks>
     </S.Container>
   );

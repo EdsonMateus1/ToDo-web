@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format } from "date-fns";
+import isConnetcted from "../../utils/isConnected";
 
 export default function Task({ match }) {
   const history = useHistory();
@@ -57,6 +58,12 @@ export default function Task({ match }) {
       }
     },
   });
+
+  useEffect(() => {
+    if (!isConnetcted) {
+      history.push("/qrcode")
+    }
+  }, [history]);
 
   const validationFomr = useCallback(() => {
     if (errors.title) {
@@ -106,7 +113,6 @@ export default function Task({ match }) {
       toast.error("nao foi possivel excluir a tarefa");
     }
   }, [match, history]);
-  
   return (
     <S.Container>
       <Header onListLate={() => history.push("/")} />
