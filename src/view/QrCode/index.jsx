@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import * as S from "./styles";
 import Qr from "qrcode.react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function QRcode() {
   const [macState, setMac] = useState("");
@@ -13,10 +13,14 @@ export default function QRcode() {
   }, []);
 
   const saveMac = useCallback(() => {
-   localStorage.setItem("@todo/macandrres", macState);
-   history.push("/");
-   window.location.reload();
-  }, [macState,history]);
+    if (!macState) {
+      alert("DIGITE O CODIGO QUE APARECEU NA TELA DO SEU CELULAR");
+    } else {
+      localStorage.setItem("@todo/macandrres", macState);
+      history.push("/");
+      window.location.reload();
+    }
+  }, [macState, history]);
 
   return (
     <S.Container>
@@ -28,7 +32,9 @@ export default function QRcode() {
       </S.QRCodeContainer>
       <strong>Digite o codigo que apareceu na tela do celular</strong>
       <input type="text" onChange={(e) => onMacState(e)} value={macState} />
-      <button className="buttonCode" onClick={saveMac}>SINCRONIZAR</button>
+      <button className="buttonCode" onClick={saveMac}>
+        SINCRONIZAR
+      </button>
       <Footer />
     </S.Container>
   );

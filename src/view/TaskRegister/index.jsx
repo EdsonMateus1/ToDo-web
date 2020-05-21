@@ -86,7 +86,7 @@ export default function Task({ match }) {
     const daTa = await axios.get(`/${match.params.id}`);
     const date = format(new Date(daTa.data.when), "yyyy-MM-dd");
     const time = format(new Date(daTa.data.when), "HH:mm");
-
+    
     setType(daTa.data.type);
     setValues({
       title: daTa.data.title,
@@ -95,12 +95,15 @@ export default function Task({ match }) {
       date: date,
       done: daTa.data.done,
     });
+    
+    
   }, [match, setValues]);
 
   useEffect(() => {
     loadTaskDetails();
   }, [loadTaskDetails]);
-
+  
+  
   const handleDelete = useCallback(async () => {
     try {
       if (window.confirm("Deseja deletar a tarefa")) {
