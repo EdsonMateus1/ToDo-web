@@ -4,23 +4,19 @@ import styled from "styled-components";
 export const Container = styled.div`
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+    display: grid;
+    grid-template-areas: "header" "main" "footer";
+    grid-template-rows: 10% calc(100% - 20%) 10%;
+    gap :5px;
+    overflow : hidden; 
+    @media screen  and (max-width: 380px) {
+        overflow: scroll;
+    }
+  
     h1{
         color: #EE6516;
         font-size: 1.5em;
         margin: 8px 0px;
-    }
-    header{
-        position: absolute;
-        top: 0px;
-    }
-    footer{
-        position: absolute;
-        bottom: 0px;
     }
     .buttonCode{
         width : 300px;
@@ -53,4 +49,12 @@ export const Container = styled.div`
 
 export const QRCodeContainer = styled.div`
     width: 350px;
+`
+export const MainContainer = styled.div`
+    grid-area: "main";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
 `

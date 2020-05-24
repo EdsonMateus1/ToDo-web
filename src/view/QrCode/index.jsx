@@ -25,16 +25,18 @@ export default function QRcode() {
   return (
     <S.Container>
       <Header />
-      <h1>Capture o QR code pelo APP</h1>
-      <strong>Suas atividades serao sincronizadas pelo celular.</strong>
-      <S.QRCodeContainer>
-        <Qr value="http://www.google.com.br" size={350} />
-      </S.QRCodeContainer>
-      <strong>Digite o codigo que apareceu na tela do celular</strong>
-      <input type="text" onChange={(e) => onMacState(e)} value={macState} />
-      <button className="buttonCode" onClick={saveMac}>
-        SINCRONIZAR
-      </button>
+      <S.MainContainer>
+        <h1>Capture o QR code pelo APP</h1>
+        <strong>Suas atividades serao sincronizadas pelo celular.</strong>
+        <S.QRCodeContainer>
+          <Qr value="http://www.google.com.br" size={350} />
+        </S.QRCodeContainer>
+        <strong>Digite o codigo que apareceu na tela do celular</strong>
+        <input type="text" onChange={(e) => onMacState(e)} value={macState} />
+        <button className="buttonCode" onClick={saveMac}>
+          SINCRONIZAR
+        </button>
+      </S.MainContainer>
       <Footer />
     </S.Container>
   );

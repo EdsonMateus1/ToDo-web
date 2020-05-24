@@ -5,9 +5,15 @@ export const Container = styled.div`
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-rows: 80px calc(100% - 180px) 80px;
+    grid-template-rows: 10% calc(100% - 20%) 10%;
     grid-template-areas: "header"  "form" "footer";
-    gap: 10px;
+    gap: 5px;
+    overflow: hidden;
+    @media screen  and (max-width: 380px) {
+        overflow: scroll;
+    }
+
+
     h3{
         color: #707070;
         margin: 5px 0px;
@@ -31,11 +37,12 @@ export const Container = styled.div`
 `
 
 export const FormContainer = styled.form`
-    justify-items: center;
     grid-area: form;
     display: grid;
-    max-height: 100%;
+    justify-items: center;
     justify-content: center;
+    align-content:center;
+    max-height: 100%;
     grid-template-rows: 60px 400px;
    
 `
@@ -55,7 +62,7 @@ export const DivIcons = styled.div`
         border: none;
     }
     img{
-        max-width: 50px ;
+        max-width: 45px ;
         max-height: 50px;
         margin: 0px 2px;
         cursor: pointer;

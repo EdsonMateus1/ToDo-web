@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.header`
     grid-area: header;
     width: 100%;
-    height: 80px;
+    max-height: 100%;
     display:flex;
     justify-content: space-between;
     border-bottom: solid 3px #EE6516;
@@ -12,7 +12,7 @@ export const Container = styled.header`
     align-items: center;
 `
 export const Img = styled.img`
-    width: 120px;
+    max-width: 90px;
     
 `
 export const ConLinks = styled.div`

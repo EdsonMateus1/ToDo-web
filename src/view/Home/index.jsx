@@ -18,8 +18,6 @@ export default function Home() {
   const gettaks = useCallback(async () => {
     const daTa = await axios.get(`/filter/${activeFilter}/11:11:11:11:11:11`);
     setTask(daTa.data);
-    console.log(daTa);
-    
   }, [activeFilter]);
 
   useEffect(() => {

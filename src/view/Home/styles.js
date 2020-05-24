@@ -4,11 +4,11 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-rows: 80px 110px 30px calc(100% - 320px) 80px  ;
+    grid-template-rows: 10% 15% 1% calc(100% - 36%) 10%  ;
     grid-template-areas: "header"  "card" "hr" "task" "footer";
-    gap: 5px;
+    
+    
 `
-
 
 export const ContainerFilter = styled.div`
       grid-area : card;  
