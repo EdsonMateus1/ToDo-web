@@ -15,6 +15,7 @@ import isConnetcted from "../../utils/isConnected";
 export default function Task({ match }) {
   const history = useHistory();
   const [type, setType] = useState(null);
+  
   const { getFieldProps, handleSubmit, errors, setValues } = useFormik({
     initialValues: {
       title: "",
