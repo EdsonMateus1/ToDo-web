@@ -34,7 +34,7 @@ export default function Home({ navigation }) {
   }, [getLate, latekStateCout]);
 
   const redirectTaks = useCallback(() => {
-    navigation.navigate("Task");
+    navigation.navigate("Taks");
   }, [navigation]);
 
   return (
@@ -87,7 +87,7 @@ export default function Home({ navigation }) {
         ))}
       </ScrollView>
 
-      <Footer showIcon={true} onPressMavigation={redirectTaks} />
+      <Footer showIcon={true} onPressNavigation={redirectTaks} />
     </View>
   );
 }

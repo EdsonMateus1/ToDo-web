@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   ScrollView,
@@ -16,12 +16,19 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import DateTimeInput from "../../components/DateTimeInput/index.android";
 
-export default function Taks() {
+export default function Taks({ navigation }) {
   const [doneState, setDone] = useState(false);
+
+  const redirectHome = useCallback(() => {
+    navigation.navigate("Home");
+  }, [navigation]);
+
   return (
     <KeyboardAvoidingView style={styles.mainContainer}>
-      <Header />
+      <Header onPressNavigation={redirectHome} />
+
       <ScrollView>
+
         <KeyboardAvoidingView
           behavior="padding"
           style={styles.mainFormContainer}
@@ -43,8 +50,10 @@ export default function Taks() {
           <TextInput style={styles.input} maxLength={30} />
           <Text style={styles.textareaDescription}>Descricao</Text>
           <TextInput style={styles.textarea} multiline={true} maxLength={200} />
+
           <DateTimeInput type="date" />
           <DateTimeInput type="time" />
+
           <View style={styles.containerCheck}>
             <View style={styles.containerCheck}>
               <Switch
@@ -58,8 +67,11 @@ export default function Taks() {
               <Text style={styles.bottonExcluir}>Excluir</Text>
             </TouchableOpacity>
           </View>
+          
         </KeyboardAvoidingView>
+        
       </ScrollView>
+
       <Footer />
     </KeyboardAvoidingView>
   );

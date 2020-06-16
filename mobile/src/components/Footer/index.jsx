@@ -5,16 +5,18 @@ import styles from "./styles";
 import logoADD from "../../assets/add.png";
 import logoSave from "../../assets/save.png";
 
-export default function Footer({ showIcon,onPressMavigation }) {
+export default function Footer({ showIcon, onPressNavigation }) {
   return (
     <View style={styles.footer}>
-      <TouchableOpacity style={styles.logo} onPress={onPressMavigation}>
-        {showIcon ? (
+      {showIcon ? (
+        <TouchableOpacity style={styles.logo} onPress={onPressNavigation}>
           <Image source={logoADD} />
-        ) : (
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.logo}>
           <Image source={logoSave} />
-        )}
-      </TouchableOpacity>
+        </TouchableOpacity>
+      )}
       <Text style={styles.text}>Organizando sua vida</Text>
     </View>
   );

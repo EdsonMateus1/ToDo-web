@@ -9,7 +9,7 @@ import logoBell from "../../assets/bell.png";
 import logoQRcode from "../../assets/qrcode.png";
 import logoArrow from "../../assets/back.png";
 
-export default function Home({ showNotification,latekStateCout,ondListLate }) {
+export default function Home({ showNotification,latekStateCout,ondListLate,onPressNavigation }) {
   return (
     <View style={styles.header}>
       <Image style={styles.imageLogo} source={logoTodo} />
@@ -27,7 +27,7 @@ export default function Home({ showNotification,latekStateCout,ondListLate }) {
           </TouchableOpacity>
         </>
       ) : (
-        <TouchableOpacity style={styles.arrowArea}>
+        <TouchableOpacity style={styles.arrowArea} onPress={onPressNavigation}>
           <Image source={logoArrow} style={styles.logoArrow} />
         </TouchableOpacity>
       )}
