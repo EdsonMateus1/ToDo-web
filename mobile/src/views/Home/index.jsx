@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect,useContext } from "react";
 import { View, ScrollView } from "react-native";
 import api from "../../services/api";
 import styles from "./styles";
@@ -10,14 +10,18 @@ import FilterCard from "../../components/FilterCard";
 import TodoCard from "../../components/TodoCard";
 import CutLine from "../../components/CutLine";
 
+import {Context} from "../../stateGlobal/Provider";
+
 export default function Home({ navigation }) {
   const [filterState, setFilter] = useState("all");
   const [taskState, setTaks] = useState([]);
 
+  const {macAddresState} = useContext(Context);
+
   const getTaks = useCallback(async () => {
-    const res = await api.get(`/filter/${filterState}/11:11:11:11:11:11`);
+    const res = await api.get(`/filter/${filterState}/${macAddresState}`);
     setTaks(res.data);
-  }, [filterState]);
+  }, [filterState,macAddresState]);
 
   useEffect(() => {
     getTaks();
@@ -25,7 +29,7 @@ export default function Home({ navigation }) {
 
   const [latekStateCout, setLate] = useState([]);
   const getLate = useCallback(async () => {
-    const date = await api.get(`/filter/late/11:11:11:11:11:11`);
+    const date = await api.get(`/filter/late/${macAddresState}`);
     setLate(date.data.length);
   }, []);
 

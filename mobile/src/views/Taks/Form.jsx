@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext, useEffect} from "react";
 import {
   View,
   ScrollView,
@@ -22,8 +22,16 @@ import Footer from "../../components/Footer";
 
 import api from "../../services/api";
 
-function Form(props) {
+import {Context} from "../../stateGlobal/Provider";
+   
+function Form (props) {
 
+  const {macAddresState} = useContext(Context);
+
+  useEffect(() =>{
+    props.setFieldValue("macaddress",macAddresState);
+  },[])
+  
   return (
     <>
       <ScrollView>
@@ -108,6 +116,8 @@ function Form(props) {
   );
 }
 
+
+
 export default withFormik({
   mapPropsToValues: () => ({
     title: "",
@@ -116,11 +126,12 @@ export default withFormik({
     date: "",
     time: "",
     type: 0,
+    macaddress: "",
   }),
   handleSubmit: async (values, { resetForm }) => {
     const data = {
       done: values.done,
-      macaddress: await Network.getMacAddressAsync(),
+      macaddress: values.macaddress,
       type: values.type,
       title: values.title,
       description: values.description,
@@ -130,7 +141,7 @@ export default withFormik({
       await api.post("/", data);
       Alert.alert("cadastro realizado com sucesso");
       resetForm();
-      console.warn(data);
+      console.warn(data)
     } catch (error) {
       console.warn(error);
     }
