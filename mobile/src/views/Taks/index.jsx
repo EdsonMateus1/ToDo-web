@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, createContext } from "react";
 import {
   View,
   ScrollView,
@@ -10,19 +10,15 @@ import {
   Switch,
 } from "react-native";
 
-import {withFormik} from "formik";
+import { withFormik } from "formik";
 
 import styles from "./styles";
 import icons from "../../utils/typeIcons";
 //COMPONENTES
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 import Form from "./Form";
 
-
 export default function Taks({ navigation }) {
- 
-  
   const redirectHome = useCallback(() => {
     navigation.navigate("Home");
   }, [navigation]);
@@ -30,7 +26,7 @@ export default function Taks({ navigation }) {
   return (
     <KeyboardAvoidingView style={styles.mainContainer}>
       <Header onPressNavigation={redirectHome} />
-      <Form />
+      <Form navigation={navigation} />
     </KeyboardAvoidingView>
   );
 }
