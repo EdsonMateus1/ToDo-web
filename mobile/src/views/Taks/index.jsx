@@ -31,7 +31,6 @@ export default function Taks({ navigation }) {
     <KeyboardAvoidingView style={styles.mainContainer}>
       <Header onPressNavigation={redirectHome} />
       <Form />
-      <Footer />
     </KeyboardAvoidingView>
   );
 }

@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#20295F",
     },
+   inative:{
+        opacity: 0.5,
+   }
 
 });
 

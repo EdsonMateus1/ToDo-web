@@ -5,7 +5,7 @@ import styles from "./styles";
 import logoADD from "../../assets/add.png";
 import logoSave from "../../assets/save.png";
 
-export default function Footer({ showIcon, onPressNavigation }) {
+export default function Footer({ showIcon, onPressNavigation ,onPressRegister}) {
   return (
     <View style={styles.footer}>
       {showIcon ? (
@@ -13,7 +13,7 @@ export default function Footer({ showIcon, onPressNavigation }) {
           <Image source={logoADD} />
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity style={styles.logo}>
+        <TouchableOpacity style={styles.logo} onPress={onPressRegister}>
           <Image source={logoSave} />
         </TouchableOpacity>
       )}
