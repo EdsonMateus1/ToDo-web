@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext, useEffect } from "react";
+import React from "react";
 import {
   View,
   ScrollView,
@@ -11,26 +11,18 @@ import {
   Alert,
 } from "react-native";
 
-import * as Network from 'expo-network';
+import * as Network from "expo-network";
 import { withFormik } from "formik";
 
 import styles from "./styles";
 import icons from "../../utils/typeIcons";
+
 import DateTimeInput from "../../components/DateTimeInput/index.android";
 import Footer from "../../components/Footer";
 
 import api from "../../services/api";
 
 function Form(props) {
-
-  const getMacAddress = useCallback(async () => {
-     const mac = await Network.getMacAddressAsync();
-      props.setFieldValue("macAddress",mac);  
-  },[]);
-
-  useEffect(() => {
-    getMacAddress();
-  }, []);
 
   return (
     <>
@@ -124,12 +116,11 @@ export default withFormik({
     date: "",
     time: "",
     type: 0,
-    macAddress: "",
   }),
   handleSubmit: async (values, { resetForm }) => {
     const data = {
       done: values.done,
-      macaddress: values.macAddress,
+      macaddress: await Network.getMacAddressAsync(),
       type: values.type,
       title: values.title,
       description: values.description,
@@ -139,6 +130,7 @@ export default withFormik({
       await api.post("/", data);
       Alert.alert("cadastro realizado com sucesso");
       resetForm();
+      console.warn(data);
     } catch (error) {
       console.warn(error);
     }
